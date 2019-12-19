@@ -1,0 +1,41 @@
+function init(self)
+	self.rot = go.get_rotation()
+	self.speed = 800
+	-- rotate the velocity vector to our orientation.
+	self.velocity = vmath.rotate(self.rot, vmath.vector3( -self.speed,0, 0))
+	self.d = 0
+end
+
+function final(self)
+
+end
+
+function update(self, dt)
+	local pos = go.get_position()
+	pos = pos + self.velocity * dt
+	self.d = self.d + self.speed * dt
+	go.set_position(pos)
+
+	if self.d > 1550 then
+		-- delete the shot when it has travelled off screen.
+		go.delete()
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message.other_id == hash("/spaceship") then
+		go.delete()
+	end
+
+
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Remove this function if not needed
+end

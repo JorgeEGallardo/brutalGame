@@ -1,24 +1,36 @@
 key_trigger {
-  input: KEY_UP
+  input: KEY_W
   action: "up"
 }
 key_trigger {
-  input: KEY_DOWN
+  input: KEY_S
   action: "down"
 }
 key_trigger {
-  input: KEY_LEFT
+  input: KEY_A
   action: "left"
 }
 key_trigger {
-  input: KEY_RIGHT
+  input: KEY_D
   action: "right"
 }
 key_trigger {
   input: KEY_SPACE
   action: "space"
 }
+key_trigger {
+  input: KEY_LSHIFT
+  action: "shift"
+}
+key_trigger {
+  input: KEY_F
+  action: "f"
+}
 mouse_trigger {
   input: MOUSE_BUTTON_1
   action: "click"
+}
+mouse_trigger {
+  input: MOUSE_BUTTON_2
+  action: "attack"
 }

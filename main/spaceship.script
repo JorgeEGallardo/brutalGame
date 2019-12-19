@@ -4,17 +4,45 @@ function init(self)
 	self.input = vmath.vector3()
 	self.mouse = false
 	self.dest = vmath.vector3()
+	self.acel = 200	
+	self.bounce = false 
+	self.stop = false
 	cap = 200
-	self.acel = 200
+	dis=1000
+	self.fire_cooldown = 0.12
+	self.health = 100
+	fc = 0.5
+	
 end
 
 function update(self, dt)
-	dis = 1000;
+	if self.health < 0 then 
+		print("perdsits jsjsj")
+		self.health = 100
+	end
 	self.dest = self.dest
 	if vmath.length_sqr(self.input) > 1 then
 		self.input = vmath.normalize(self.input)
 	end
 	local p = go.get_position()
+	if self.bounce then 
+		self.mouse = false;
+		if p.x<250 then 
+			self.input.x =1 
+		elseif p.x>500 then
+			self.input.x=-1
+		else
+			self.input.x =0 
+		end 
+		if p.y<150 then 
+			self.input.y =1 
+		elseif p.y>200 then
+			self.input.y=-1
+		else
+			self.input.y=0
+		end 
+	end
+	
 	if self.mouse then
 		self.dest = self.dest
 		self.mouse = self.mouse
@@ -31,33 +59,48 @@ function update(self, dt)
 			self.input.y = -1;
 		end
 		dis = math.sqrt((self.dest.x - p.x) ^2 + (self.dest.y-p.y)^2)
-		
-		
-		
 	end
 	local acceleration = self.input * self.acel
 	local dv = acceleration * dt
 	local v0 = self.velocity
 	local v1 = self.velocity + dv
+	if self.stop == true then 
+		v1= stop(v1) 
+	end
 	local movement = (v0 + v1) * dt * 0.5
-	print(movement)
-	
-	
 	go.set_position(p + movement)   
 	v1=checkCap(v1, cap)
-	
+	self.bounce = checkColide(p)
 	self.velocity = v1
 	self.input = vmath.vector3()
 	self.acel  = 200
+	local obj = go.set("/health", "scale.x", self.health/100)
+	
+	self.fire_cooldown = self.fire_cooldown - dt
 end
 
-function checkColide(vel, pos)
-	if pos.x <50 then
-		vel.x = (-1*vel.x)*500
+function checkColide(pos)
+	bounce = false
+	if pos.x <150 then
+		bounce = true
+	end 
+	if pos.y <150 then
+		bounce = true
 	end
-	return vel; 
+	if pos.x >1150 then
+		bounce = true
+	end
+	if pos.y >610 then
+		bounce = true
+	end
+	return bounce; 
 end
 
+function stop(v)
+	v.x =v.x - v.x/15
+	v.y =v.y - v.y/15
+	return v
+end
 
 function checkCap(vel, cap)
 	if vel.x > cap then
@@ -78,23 +121,51 @@ end
 
 	return vel
 end
-function on_input(self, action_id, action)
+function on_message(self, message_id, message, sender)
+	-- Handle collision
+	if message.other_id == hash("/buda") then
+		local newpos = go.get_position()*0.92 + message.normal * message.distance 
+		go.set_position(newpos)
+
+		self.velocity = vmath.vector3(0,0,0)
+		self.health = self.health - 10
+	end
+	if message.other_group== hash("bullet") then
+		self.health = self.health - 1
+	end
 	
+end
+function on_input(self, action_id, action)
 	if action_id == hash("up") then
 		self.input.y = 1
 		self.mouse = false
+		self.stop = false
 	elseif action_id == hash("down") then
 		self.input.y = -1
 		self.mouse = false
+		self.stop =false
 	elseif action_id == hash("left") then
 		self.input.x = -1
 		self.mouse = false
+		self.stop = false
 	elseif action_id == hash("right") then
 		self.input.x = 1
 		self.mouse = false 
+		self.stop = false
 	elseif action_id == hash("click") and action.pressed then
 		self.mouse = true
+		self.stop = false
 		self.dest.x = action.x;
 		self.dest.y = action.y;
+	elseif action_id == hash("space") then
+		self.mouse = false 
+		self.stop = true
+	end
+	if action_id == hash("attack") and action.pressed or action_id == hash("f") then
+		if self.fire_cooldown > 0 then
+			return
+		end 
+		factory.create("#laserfactory", go.get_position())
+		self.fire_cooldown = fc
 	end
 end
