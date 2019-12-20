@@ -15,14 +15,14 @@ function update(self, dt)
 		self.atack = 0
 		self.attack = math.random(0,2)
 		if self.attack == 1 then
-			self.timer = 1
+			self.timer = 5
 			self.attack = 1
 		elseif self.attack == 1 then
 			self.timer = 10
 			self.attack = 2
 		else
 		
-			self.timer = 1
+			self.timer = 5
 		end
 	end
 	
@@ -32,7 +32,7 @@ function update(self, dt)
 	if self.attack == 1 then 
 		self.cd = dobleDeathHiperCanon(self.cd)
 	elseif self.attack == 2 then 
-		go.set_position(vmath.vector3(1750,1394,0))
+		self.cd = spawnDeathMortalGhosts(self.cd)
 	end
 
 end
@@ -47,6 +47,17 @@ function dobleDeathHiperCanon(cd)
 	factory.create("#topLaser",t)
 	factory.create("#topLaser",b)
 	cd = 0.2 
+	return cd
+end
+function spawnDeathMortalGhosts(cd) 
+	if cd > 0  then
+		return cd
+	end
+	go.set_position(vmath.vector3(1750,1394,0), "#main")
+	local b = vmath.vector3(go.get_position().x,go.get_position().y*(math.random(1,100)/100),0) 
+	factory.create("#topLaser",b)
+	cd = 0.2 
+	print(b)
 	return cd
 end
 function on_message(self, message_id, message, sender)

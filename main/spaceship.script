@@ -16,6 +16,7 @@ function init(self)
 end
 
 function update(self, dt)
+	
 	if self.health < 0 then 
 		print("perdsits jsjsj")
 		self.health = 100

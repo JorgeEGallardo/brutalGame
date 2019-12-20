@@ -1,5 +1,5 @@
 images {
-  image: "/assets/buda.png"
+  image: "/assets/demon.png"
 }
 images {
   image: "/assets/bullet.png"
@@ -10,10 +10,123 @@ images {
 animations {
   id: "New Animation"
   images {
-    image: "/assets/mystic.png"
+    image: "/assets/Wisp View3.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
   fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "Skull"
+  images {
+    image: "/assets/skull (10).png"
+  }
+  images {
+    image: "/assets/skull (11).png"
+  }
+  images {
+    image: "/assets/skull (12).png"
+  }
+  images {
+    image: "/assets/skull (13).png"
+  }
+  images {
+    image: "/assets/skull (14).png"
+  }
+  images {
+    image: "/assets/skull (15).png"
+  }
+  images {
+    image: "/assets/skull (7).png"
+  }
+  images {
+    image: "/assets/skull (9).png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "Ghost"
+  images {
+    image: "/assets/Ghost (1).png"
+  }
+  images {
+    image: "/assets/Ghost (10).png"
+  }
+  images {
+    image: "/assets/Ghost (11).png"
+  }
+  images {
+    image: "/assets/Ghost (12).png"
+  }
+  images {
+    image: "/assets/Ghost (13).png"
+  }
+  images {
+    image: "/assets/Ghost (14).png"
+  }
+  images {
+    image: "/assets/Ghost (15).png"
+  }
+  images {
+    image: "/assets/Ghost (16).png"
+  }
+  images {
+    image: "/assets/Ghost (17).png"
+  }
+  images {
+    image: "/assets/Ghost (18).png"
+  }
+  images {
+    image: "/assets/Ghost (19).png"
+  }
+  images {
+    image: "/assets/Ghost (2).png"
+  }
+  images {
+    image: "/assets/Ghost (20).png"
+  }
+  images {
+    image: "/assets/Ghost (21).png"
+  }
+  images {
+    image: "/assets/Ghost (22).png"
+  }
+  images {
+    image: "/assets/Ghost (23).png"
+  }
+  images {
+    image: "/assets/Ghost (24).png"
+  }
+  images {
+    image: "/assets/Ghost (25).png"
+  }
+  images {
+    image: "/assets/Ghost (26).png"
+  }
+  images {
+    image: "/assets/Ghost (3).png"
+  }
+  images {
+    image: "/assets/Ghost (4).png"
+  }
+  images {
+    image: "/assets/Ghost (5).png"
+  }
+  images {
+    image: "/assets/Ghost (7).png"
+  }
+  images {
+    image: "/assets/Ghost (8).png"
+  }
+  images {
+    image: "/assets/Ghost (9).png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 5
   flip_horizontal: 0
   flip_vertical: 0
 }
