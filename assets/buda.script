@@ -53,9 +53,8 @@ function spawnDeathMortalGhosts(cd)
 	if cd > 0  then
 		return cd
 	end
-	go.set_position(vmath.vector3(1750,1394,0), "#main")
-	local b = vmath.vector3(go.get_position().x,go.get_position().y*(math.random(1,100)/100),0) 
-	factory.create("#topLaser",b)
+	local b = vmath.vector3(go.get_position().x*(math.random(1,100)/100),go.get_position().y*(math.random(1,100)/100),0) 
+	factory.create("#bottomLaser",b)
 	cd = 0.2 
 	print(b)
 	return cd

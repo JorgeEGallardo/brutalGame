@@ -323,7 +323,7 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"bottomLaser\"\n"
   "  type: \"factory\"\n"
-  "  data: \"prototype: \\\"/assets/budaLasser.go\\\"\\n"
+  "  data: \"prototype: \\\"/main/skull.go\\\"\\n"
   "load_dynamically: false\\n"
   "\"\n"
   "  position {\n"
